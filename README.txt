@@ -1,0 +1,1 @@
+https://code.visualstudio.com/docs/languages/cpp 참고하여 vscode 에 C++ 설정함
