@@ -1,4 +1,4 @@
-// https://www.acmicpc.net/board/view/107353
+// https://www.acmicpc.net/problem/2309
 // run at PowerShell on Windows11: `Get-Content .\1A_2309_input.txt | .\1A_2309.exe`
 #include<bits/stdc++.h>
 using namespace std;
