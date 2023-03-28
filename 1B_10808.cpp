@@ -1,4 +1,4 @@
-// https://www.acmicpc.net/board/view/107353
+// https://www.acmicpc.net/problem/10808
 // run at PowerShell on Windows11: `Get-Content .\1B_10808_input.txt | .\1B_10808.exe`
 
 #include<bits/stdc++.h>
