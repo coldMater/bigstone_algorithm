@@ -1,0 +1,11 @@
+9
+abcd*xyz
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvxyz
+abcdefghijklmnopqrstuvyz
+abdefghijklmnopqrstuvyz
+abcdxyz
+abcdyz
+abcxyz
+a
+abcdexyz
