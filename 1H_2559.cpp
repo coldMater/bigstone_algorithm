@@ -15,6 +15,7 @@ int main () {
     for (int i = 0; i < sn; ++i) {
         sum += a[i];
     }
+    if (sum > m) m = sum; // If the sum of the first group is maximum.
 
     for (int i = sn; i < dn; ++i) {
         sum -= a[i-sn];
