@@ -11,14 +11,20 @@ using namespace std;
 
 int n, qn; // number(pokemon total count), number of question
 string name, t; // target
-map<int, string> d1; // Using number(number - represented as '1') as a key
-map<string, int> da; // Using name(character - represented as 'a') as a key
+string a[100001]; // Using number(number - represented as '1') as a key
+unordered_map<string, int> da; // Using name(character - represented as 'a') as a key
+// map<string, int> da; // Also has passed with 'map' with 160ms. But unordered_map was faster with 108ms.
+// using map(160ms): https://www.acmicpc.net/source/share/16ae131eb2db42cab64b658deddf31b9
+// using unordered_map(108ms): https://www.acmicpc.net/source/share/e8714cba564d44398eccd0a3f40e8170
 int main () {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
     cin >> n >> qn;
 
     for (int i = 1; i <= n; ++i) {
         cin >> name;
-        d1.insert({i, name});
+        a[i] = name;
         da.insert({name, i});
     }
 
@@ -27,7 +33,8 @@ int main () {
         if (atoi(t.c_str()) == 0) {
             cout << da[t] << "\n";
         } else {
-            cout << d1[atoi(t.c_str())] << "\n";
+            // cout << d1[atoi(t.c_str())] << "\n"; // Time Complexity of this line is O(logN), but O(1) is better like below.
+            cout << a[atoi(t.c_str())] << "\n";
         }
     }
 
