@@ -31,6 +31,7 @@ if [ -z "$files" ]; then
     exit 1
 fi
 
+error=0
 # 테스트 입력 및 출력 파일 테스트 실행
 for file in $files; do
     num=$(echo "$file" | sed 's/.*_\([0-9]*\)_input.txt/\1/')
@@ -54,14 +55,12 @@ for file in $files; do
     if [ $error -eq 0 ]
     then
         echo "Congratulations! Correct!"
-        exit 0
     elif [ $error -eq 1 ]
     then
         echo "XXX! Incorrect......"
         echo "$output"
-        exit 1
     else
         echo "$errorMsg"
     fi
-    exit $error
 done
+exit $error
