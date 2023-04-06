@@ -8,7 +8,8 @@ int s; // serial number of materials for making armor
 int cl, cr; // cursor left, cursor right
 int r; // count of available armor
 // map<int, bool> a; // 1st Try Passed, 26408 KB Memory, 140ms
-bool a[10'000'001]; // 2nd Try Passed, 11788 KB Memory, 4ms
+// bool a[200'001]; // 2nd Try Passed, 11788 KB Memory, 4ms
+int a[15001]; // 4th Try Passed, 2080 KB Memory, 0ms - Reduce Memory Waste
 int main () {
     ios_base::sync_with_stdio(false); // 3nd Try Passed, 11788 KB Memory, 0ms
     cin.tie(NULL);cout.tie(NULL);
@@ -17,24 +18,23 @@ int main () {
     cin >> t;
 
     for (int i = 0; i < c; ++i) {
-        cin >> s;
-        a[s] = true;
+        cin >> a[i];
     }
+    cl = 0;
+    cr = c - 1;
 
-    if (t & 1) {
-        cl = t / 2 ;
-        cr = cl + 1;
-    } else {
-        cl = (t / 2) - 1;
-        cr = cl + 2;
-    }
+    sort(a, a + c);
 
-    while (cr < t) {
-        // cout << cl << " " << cr;
-        
-        if (a[cl] && a[cr]) r++;
-        cl--;
-        cr++;
+    while (cl < cr) {
+        if (a[cl] + a[cr] == t) {
+            r++;
+            cl++;
+            cr--;
+        } else if (a[cl] + a[cr] > t) {
+            cr--;
+        } else {
+            cl++;
+        }
     }
 
     cout << r;
