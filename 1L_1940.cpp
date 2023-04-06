@@ -10,6 +10,9 @@ int r; // count of available armor
 // map<int, bool> a; // 1st Try Passed, 26408 KB Memory, 140ms
 bool a[10'000'001]; // 2nd Try Passed, 11788 KB Memory, 4ms
 int main () {
+    ios_base::sync_with_stdio(false); // 3nd Try Passed, 11788 KB Memory, 0ms
+    cin.tie(NULL);cout.tie(NULL);
+
     cin >> c;
     cin >> t;
 
