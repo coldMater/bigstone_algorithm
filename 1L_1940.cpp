@@ -7,7 +7,8 @@ int t; // target number to create armor
 int s; // serial number of materials for making armor
 int cl, cr; // cursor left, cursor right
 int r; // count of available armor
-map<int, bool> a;
+// map<int, bool> a; // 1st Try Passed, 26408 KB Memory, 140ms
+bool a[10'000'001]; // 2nd Try Passed, 11788 KB Memory, 4ms
 int main () {
     cin >> c;
     cin >> t;
