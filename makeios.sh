@@ -5,7 +5,7 @@ bjNum="$2"
 filename="${problemNum}_${bjNum}"
 iocount="$3" # count of input, output set 
 
-echo "// https://www.acmicpc.net/problem/1940" >> ""$filename".cpp"
+echo "// https://www.acmicpc.net/problem/${bjNum}" >> ""$filename".cpp"
 
 for i in $(seq 1 $iocount)
 do
