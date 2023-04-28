@@ -8,6 +8,7 @@ int dy[4] = { 1, 0, -1, 0 };
 int dx[4] = { 0, 1, 0, -1 };
 
 int visited[101][101];
+queue<pair<int, int>> q;
 string l;
 
 void print (int c[101][101], int h, int w) {
@@ -16,18 +17,6 @@ void print (int c[101][101], int h, int w) {
             cout << c[i][j] << "\t";
         }
         cout << "\n";
-    }
-}
-
-void go(int y, int x) {
-    // cout << y << "," << x << "\n";
-    for (int i = 0; i < 4; ++i) {
-        int ny = y + dy[i];
-        int nx = x + dx[i];
-        if (nx <= 0 || ny <= 0 || nx > w || ny > h) continue;
-        if (visited[ny][nx] != 0 || m[ny][nx] == 0) continue;
-        visited[ny][nx] = visited[y][x] + 1;
-        go(ny, nx);
     }
 }
 
@@ -44,9 +33,24 @@ int main () {
     // print(m, h, w);
 
     visited[1][1] = 1;
-    go(1, 1);
+    q.push({1, 1});
 
-    print (visited, h, w);
+    while (q.size()) {
+        int y = q.front().first;
+        int x = q.front().second;
+        q.pop();
+
+        for (int i = 0; i < 4; ++i) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx < 1 || ny < 1 || nx > w || ny > h) continue;
+            if (visited[ny][nx] != 0 || m[ny][nx] == 0) continue;
+            visited[ny][nx] = visited[y][x] + 1;
+            q.push({ny, nx});
+        }
+    }
+
+    // print (visited, h, w);
 
     cout << visited[h][w];
 
