@@ -23,7 +23,7 @@ void tick () {
 }
 int main () {
     cin >> H >> W;
-    fill(&r[0][0], &r[H][W], -1);
+    fill(&r[0][0], (&r[H - 1][W - 1]) + 1, -1);
 
     for (int i = 0; i < H; ++i) {
         string h = "";
