@@ -8,12 +8,14 @@ string s;
 bool c(string s) {
     stack<char> st;
     for (char c : s) {
+        if (st.empty()) {
+            if (c == ')') return false;
+        }
+
         if (c == '(') {
             st.push(c);
-        } else if (!st.empty()) { // when c == '('
+        } else {
             st.pop();
-        } else if (st.empty()) { // when c == '('
-            return false;
         }
     }
 
