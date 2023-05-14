@@ -1,0 +1,15 @@
+// https://www.acmicpc.net/problem/4949
+#include <bits/stdc++.h>
+using namespace std;
+
+bool check() {
+    return false;
+}
+
+string s;
+int main () {
+    while (true) {
+        if (s == "") break;
+    }
+    return 0;
+}
