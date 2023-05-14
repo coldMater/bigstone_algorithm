@@ -8,7 +8,8 @@ string t; // time
 int to[3]; // team occupied
 int rgt; // recent goal time (unit: second)
 int rgn; // recent goal team number
-
+int winning;
+int score[3];
 int getSecFromStr(string t) {
     bool flag = false;
     string m;
@@ -31,26 +32,22 @@ int getSecFromStr(string t) {
 
 int main () {
     cin >> gc;
-    cin >> tn;
-    cin >> t;
-    rgn = tn;
-    rgt = getSecFromStr(t);
-    for (int i = 1; i < gc; ++i) {
+    for (int i = 0; i < gc; ++i) {
         cin >> tn;
         cin >> t;
+        to[winning] += getSecFromStr(t) - rgt;
 
-        if (tn == rgn) continue;
-
-        to[rgn] += getSecFromStr(t) - rgt;
+        score[tn]++;
 
         rgn = tn;
         rgt = getSecFromStr(t);
-    }
+        winning = score[1] > score [2] ? 1 : score[2] > score[1] ? 2 : 0;
+    } 
 
-    to[rgn] += (48 * 60) - rgt;
+    // After Last Goal
+    to[winning] += (48 * 60) - rgt;
 
     printf("%02d:%02d\n", to[1] / 60, to[1] % 60);
-    printf("%02d:%02d\n", to[2] / 60, to[1] % 60);
-
+    printf("%02d:%02d\n", to[2] / 60, to[2] % 60);
     return 0;
 }
