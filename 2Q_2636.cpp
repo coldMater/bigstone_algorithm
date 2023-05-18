@@ -40,14 +40,17 @@ int main () {
     cin >> h >> w;
     for (int i = 0; i < h; ++i) {
         for (int j = 0; j < w; ++j) {
-            rac++;
             cin >> m[i][j];
+            if (m[i][j] == 1) {
+                rac++;
+            }
         }
     }
 
+    cch.push_back(rac);
+
     int t = 0;
     while (rac) {
-        cch.push_back(rac);
         rac = 0;
         t++;
         dfs(0, 0);
@@ -62,9 +65,10 @@ int main () {
             }
         }
         // print();
+        cch.push_back(rac);
     }
     cout << t << "\n";
-    cout << *(cch.end() - 1) << "\n";
+    cout << *(cch.end() - 2) << "\n";
 
     return 0;
 }
