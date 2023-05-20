@@ -7,6 +7,7 @@ int p[50]; // parent
 int v[50]; // visited
 int lc; // leaf count
 int cn; // cut node number
+int root; // 
 vector<int> adj[50];
 
 void dfs(int node) {
@@ -27,17 +28,19 @@ int main () {
         cin >> p[i];
         if (p[i] != -1) {
              adj[p[i]].push_back(i);
+        } else {
+            root = i;
         }
     }
 
     cin >> cn;
     
-    if (cn == 0) {
+    if (cn == root) {
         cout << 0;
         return 0;
     }
 
-    dfs(0);
+    dfs(root);
 
     cout << lc;
 
