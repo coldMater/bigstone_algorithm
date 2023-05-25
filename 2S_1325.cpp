@@ -4,8 +4,8 @@ using namespace std;
 
 int N, M;
 int a, b;
-vector<int> l[100'000];
-bool visited[100'000];
+vector<int> l[100'001];
+bool visited[100'001];
 vector<int> reliable;
 int m;
 int cnt;
@@ -28,11 +28,12 @@ int main () {
         l[b].push_back(a);
     }
 
-    for (int i = 0; i < N; ++i) {
+    for (int i = 1; i <= N; ++i) {
         dfs(i);
         if (m < cnt) {
             m = cnt;
-            reliable = { i };
+            reliable.clear();
+            reliable.push_back(i);
         } else if (cnt != 0 && m == cnt) {
             reliable.push_back(i);
         }
