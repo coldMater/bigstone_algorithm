@@ -5,28 +5,33 @@ using namespace std;
 int N;
 int a[1'000'000];
 int nge[1'000'000];
+stack<int> s;
 int main () {
     cin >> N;
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);cout.tie(NULL);
 
     for (int i = 0; i < N; ++i) {
         cin >> a[i];
     }
 
-    for (int i = N - 1 ; i >= 0; --i) {
-        nge[i] = -1;
-        for (int j = i + 1; j < N; ++j) {
-            if (a[i] == a[j]) {
-                nge[i] = nge[j];
-                break;
-            } else if (a[i] < a[j]) {
-                nge[i] = a[j];
-                break;
-            } else if (a[i] > a[i]) {
-                continue;
+    for (int i = 0; i < N; ++i) {
+        if (s.empty()) {
+            s.push(i);
+            continue;
+        }
+
+        if (a[s.top()] < a[i]) {
+            while(!s.empty() && a[s.top()] < a[i]) {
+                nge[s.top()] = a[i];
+                s.pop();
             }
         }
+
+        s.push(i);
+    }
+
+    while (!s.empty()) {
+        nge[s.top()] = -1;
+        s.pop();
     }
 
     for (int i = 0; i < N; ++i) {
