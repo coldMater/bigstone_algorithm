@@ -23,14 +23,14 @@ void calcCD () { // calculate Chicken Distance
 }
 
 void go (int d) {
-    if (d == M) {
+    if (rcs.size() == M) {
         calcCD();
         return;
     }
 
     for (int i = d; i < cs.size(); ++i) {
         rcs.push_back(cs[i]);
-        go(d + 1);
+        go(i + 1);
         rcs.pop_back();
     }
 }
