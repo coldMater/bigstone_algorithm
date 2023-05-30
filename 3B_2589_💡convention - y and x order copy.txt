@@ -1,0 +1,13 @@
+Always put y first. 
+
+❌
+```cpp
+int x = q.front().first; // Can cause mistake
+int y = q.front().second;
+```
+
+✅
+```cpp
+int y = q.front().first;
+int x = q.front().second;
+```
