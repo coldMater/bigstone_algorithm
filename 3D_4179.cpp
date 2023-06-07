@@ -94,25 +94,24 @@ int main () {
         }
     }
 
-    int t = 0; // turn
-    while (true) {
+    for (int t = 0; t < max(C, R); ++t) {
         fire();
         if (escaped) {
             cout << c;
-            break;
+            return 0;
         }
 
         if (died) {
             cout << "IMPOSSIBLE";
-            break;
+            return 0;
         }
 
         if (max(C, R) < t) {
             cout << "IMPOSSIBLE";
-            break;
+            return 0;
         }
-        t++;
     }
+    cout << "IMPOSSIBLE";
 
     return 0;
 }
