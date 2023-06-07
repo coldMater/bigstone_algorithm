@@ -94,6 +94,7 @@ int main () {
         }
     }
 
+    int t = 0; // turn
     while (true) {
         fire();
         if (escaped) {
@@ -105,6 +106,12 @@ int main () {
             cout << "IMPOSSIBLE";
             break;
         }
+
+        if (max(C, R) < t) {
+            cout << "IMPOSSIBLE";
+            break;
+        }
+        t++;
     }
 
     return 0;
