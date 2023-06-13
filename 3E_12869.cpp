@@ -5,6 +5,25 @@ using namespace std;
 int N;
 int h[3];
 int deal[3] = { 9, 3, 1 };
+map<int, bool> visited;
+
+void setVisited(vector<int> &v) {
+    int key = 0;
+    for (int i = 0; i < v.size(); ++i) {
+        key += pow(10, (2 - i) * 2) * v[i];
+    }
+    visited[key] = true;
+}
+
+bool isVisited(vector<int> &v) {
+    int key = 0;
+    for (int i = 0; i < v.size(); ++i) {
+        key += pow(10, (2 - i) * 2) * v[i];
+    }
+    auto r = visited.find(key);
+    if (r == visited.end()) return false;
+    return true;
+}
 
 void swap (int i, int d, vector<int> &v) {
     int t = v[i];
@@ -64,7 +83,9 @@ int main () {
                 cout << depth;
                 return 0;
             }
+            if (isVisited(ns)) continue;
             nv.push_back(ns);
+            setVisited(ns);
         }
     }
 
