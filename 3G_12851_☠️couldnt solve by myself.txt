@@ -1,0 +1,12 @@
+# Key Point 1: Boundary condition
+The maximum length of the array and the maximum index of the array are different.
+If the max length is 20, the max index of the array is 19.
+If you want to use the index of the array as a natural number, the length of the array must be set to N + 1 or greater.
+In this problem (3G_12851), the range of Subin's position is from 0 to 100,000. So, the total number of elements in the array is 100,001.
+As a consequence, the length of the visited array must be set as v[100,001].
+
+# Key Point 2: Paths can be counted within the BFS algorithm
+Initially, I used BFS to find the shortest time, and then attempted to find the actual paths using a recursive function.
+However, this approach took too long to execute. After reviewing the solution, I noticed that the paths were counted within the BFS algorithm itself.
+Due to the requirement of finding the shortest paths, the counting was done before pushing the elements into the queue.
+However, I currently find it unclear and believe that I need to take some time to understand it more thoroughly.

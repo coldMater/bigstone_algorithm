@@ -4,64 +4,39 @@ using namespace std;
 
 int isp; // subin's initial position
 int bp; // brother's position
-int v[100'001];
-int t;
-int mt; // minimum time
-int mtpc; // minimum time path count
+const int M = 100'001;
+int v[M];
+int c[M];
 
-int bfs (int s) {
+void bfs (int s) {
     queue<int> q;
     q.push(s);
     while (q.size()) {
-        int p = q.front();
-        if (p == bp) { 
-            return v[p];
-        }
+        int now = q.front();
         q.pop();
 
-        if (p - 1 >= 0 && v[p - 1] == 0) {
-            t++;
-            v[p-1] = v[p] + 1;
-            q.push(p - 1);
-        }
-        if (p + 1 < 100'001 && v[p + 1] == 0) {
-            t++;
-            v[p+1] = v[p] + 1;
-            q.push(p + 1);
-        }
-        if (p * 2 < 100'001 && v[p * 2] == 0) {
-            t++;
-            v[p*2] = v[p] + 1;
-            q.push(p * 2);
+        for (int next : { now - 1, now + 1, now * 2 }) {
+            if (next < 0 || next >= M) continue;
+            if (v[next] == 0) {
+                c[next] += c[now];
+                v[next] = v[now] + 1;
+                q.push(next);
+            } else if (v[next] == v[now] + 1) {
+                c[next] += c[now];
+            }
         }
     }
-    return -1;
-}
-
-int cc = 0;
-void go (int s, int d) {
-    cc++;
-    if (d >= mt - 1) {
-        if (s == bp) mtpc++;
-        return;
-    }
-
-    go(s - 1, d + 1);
-    go(s + 1, d + 1);
-    go(s * 2, d + 1);
 }
 
 int main () {
     cin >> isp >> bp;
 
     v[isp] = 1;
-    mt = bfs(isp);
+    c[isp] = 1;
+    bfs(isp);
 
-    cout << mt - 1 << "\n";
-
-    go(isp, 0);
-    cout << mtpc << "\n";
-    cout << cc;
+    cout << v[bp] - 1 << "\n";
+    cout << c[bp] << "\n";
 
     return 0;
 }
