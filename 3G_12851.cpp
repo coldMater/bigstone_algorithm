@@ -38,8 +38,10 @@ int bfs (int s) {
     return -1;
 }
 
+int cc = 0;
 void go (int s, int d) {
-    if (d == mt - 1) {
+    cc++;
+    if (d >= mt - 1) {
         if (s == bp) mtpc++;
         return;
     }
@@ -58,7 +60,8 @@ int main () {
     cout << mt - 1 << "\n";
 
     go(isp, 0);
-    cout << mtpc;
+    cout << mtpc << "\n";
+    cout << cc;
 
     return 0;
 }
