@@ -1,0 +1,5 @@
+# Key point 1
+The key is to memorize the path.
+I attempted to use a map (hash table) for this purpose, but it exceeded the memory limit.
+Upon reviewing the solution, 
+I realized that memorizing the paths could be accomplished simply by storing the previous position in a specific index of the array.

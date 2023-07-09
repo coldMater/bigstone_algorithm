@@ -5,12 +5,11 @@ using namespace std;
 int sip, bp; // subin's initial position, brother's position
 const int M = 100'001;
 int v[M]; // vistited
-map<int, string> h;
+int p[M]; // previous position
 
 void bfs() {
   queue<int> q;
   v[sip] = 1;
-  h[sip] = to_string(sip);
   q.push(sip);
 
   while (q.size()) {
@@ -21,7 +20,7 @@ void bfs() {
       if (next < 0 || next >= M) continue;
       if (v[next] == 0) {
         v[next] = v[now] + 1;
-        h[next] = h[now] + " " + to_string(next);
+        p[next] = now;
         if (next == bp) return;
         q.push(next);
       }
@@ -32,6 +31,15 @@ void bfs() {
 int main () {
   cin >> sip >> bp;
   bfs();
-  cout << v[bp] - 1 <<  "\n" << h[bp];
+  cout << v[bp] - 1 <<  "\n";
+  stack<int> r;
+  for (int i = bp; i != sip; i = p[i]) {
+    r.push(i);
+  }
+  r.push(sip);
+  while(!r.empty()) {
+    cout << r.top() << " ";
+    r.pop();
+  }
   return 0;
 }
