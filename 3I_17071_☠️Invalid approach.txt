@@ -1,0 +1,6 @@
+Couldn't approach to the appropriate solution.
+Through reviewing the solution, I realize that it is not like general BFS.
+First, visited array is made of 2D array. And, first index of the array means "Turn".
+
+Because Subin can move +1 or -1 at each turn, if Subin's position at some point is the same as where his brother has visited before,
+it means that sometime in the future Subin can reach there.
