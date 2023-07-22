@@ -10,3 +10,11 @@ This is because Subin can move to the location 9 at 11 seconds (+1), to the loca
 back to the location 9 at 13 seconds (-1), and finally to the location 8 at 14 seconds (-1).
 
 If the time difference between Subin's visit and Brother's visit is odd, they cannot meet at that point.  
+
+--- 3rd try wrong point
+Subin can approach some point at even or odd time. We can consider multiple paths for Subin's position to move from 5 to 11.
+ex1. 5 -> 10 -> 11 (It takes 2 units of time)
+ex2. 5 -> 6 -> 12 -> 11 (It takes 3 units of time)
+Subin's time taken to reach a specific point can be odd or even as shown in the example above.
+
+So, both histories must be recorded. It says we need a visited array for odd times and another for even times.
