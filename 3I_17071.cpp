@@ -5,27 +5,20 @@ using namespace std;
 int sip, bp; // subin's initial position, brother's position
 const int M = 500'001; // MAX
 int visited[M];
-int now, bpp;
-void bfs () {
+int now;
+void bfs () { // brother's present position
   queue<int> q;
   q.push(sip);
   visited[sip] = 1;
 
   while (!q.empty()) {
-    int now = q.front();
+    int prev = q.front();
     q.pop();
 
-    for (int next : { now - 1, now + 1, now * 2 }) {
+    for (int next : { prev - 1, prev + 1, prev * 2 }) {
       if (next < 0 || next >= M) continue;
-      visited[next] = visited[now] + 1;
-      bpp = bp + (visited[now] + 1) * visited[now] / 2; // brother's present position
-      if (bpp >= M) {
-        bpp = -1;
-        return;
-      }
-      if (bpp == next) {
-        return;
-      }
+      if (visited[next] != 0) continue;
+      visited[next] = visited[prev] + 1;
       q.push(next);
     }
   }
@@ -40,7 +33,32 @@ int main () {
   }
 
   bfs();
-  cout << visited[bpp] - 1;
+  int t = 0;
+  int min = 987654321;
+  int minT = 0;
+  while(true) {
+    t++;
+    bp = bp + t;
+    if (bp >= M) {
+      break;
+    }
+    if ((visited[bp] - 1 - t) % 2 == 0) {
+      if (min > (visited[bp] - 1)) { 
+        min = visited[bp] - 1;
+        minT = t;
+      }
+      if (visited[bp] - 1 == t) {
+        cout << t;
+        return 0;
+      }
+    }
+    // cout << visited[bp] - 1 << "\t" << bp << "\t" << t << " " << minT << "\t" << (q ? " MIN" : " ") << "\n";
+  }
+  if (minT == 0) {
+    cout << "-1";
+  } else {
+    cout << minT;
+  }
 
   return 0;
 }
