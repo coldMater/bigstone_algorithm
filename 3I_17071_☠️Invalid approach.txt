@@ -1,6 +1,12 @@
-Couldn't approach to the appropriate solution.
-Through reviewing the solution, I realize that it is not like general BFS.
-First, visited array is made of 2D array. And, first index of the array means "Turn".
+Since Subin can move by +1 or -1 at each turn, 
+if at any moment Brother's position becomes the same as a location Subin had visited before,
+and the time difference between Subin's visit and Brother's visit is even, 
+then they are considered to have met.
 
-Because Subin can move +1 or -1 at each turn, if Subin's position at some point is the same as where his brother has visited before,
-it means that sometime in the future Subin can reach there.
+
+For example, 
+if Subin visited the location 8 at 10 seconds, and Brother reached the location 8 at 14 seconds, then they can meet at 14 seconds. 
+This is because Subin can move to the location 9 at 11 seconds (+1), to the location 10 at 12 seconds (+1),
+back to the location 9 at 13 seconds (-1), and finally to the location 8 at 14 seconds (-1).
+
+If the time difference between Subin's visit and Brother's visit is odd, they cannot meet at that point.  
