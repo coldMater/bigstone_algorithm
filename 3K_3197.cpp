@@ -12,26 +12,22 @@ int dx[4] = { 0, 1, 0, -1 };
 pair<int, int> sw; // swan
 queue<pair<int, int>> ims; // ice list to be melted
 queue<pair<int, int>> tempIms; // ice list to be melted TEMP
+queue<pair<int, int>> sQ; // swan Queue
+queue<pair<int, int>> tempSQ; // swan Queue TEMP
 
 bool check () {
-  fill(&sVisited[0][0], &sVisited[0][0] + M * M, 0);
-  queue<pair<int, int>> q;
-  q.push(sw);
-  sVisited[sw.first][sw.second] = 1;
-  while (!q.empty()) {
-    pair<int, int> prev = q.front();
-    q.pop();
+  while (!sQ.empty()) {
+    pair<int, int> prev = sQ.front();
+    sQ.pop();
     for (int i = 0; i < 4; ++i) {
       int ny = prev.first + dy[i];
       int nx = prev.second + dx[i];
       if (ny < 0 || nx < 0 || ny >= r || nx >= c) continue;
       if (sVisited[ny][nx] != 0) continue;
-      if (m[ny][nx] == 'X') continue;
       sVisited[ny][nx] = 1;
-      if (m[ny][nx] == 'L') { 
-        return true;
-      }
-      q.push({ ny, nx });
+      if (m[ny][nx] == 'X') tempSQ.push({ ny, nx });
+      else if (m[ny][nx] == 'L') return true;
+      else sQ.push({ ny, nx });
     }
   }
   return false;
@@ -69,6 +65,9 @@ int main () {
     }
   }
 
+  sQ.push(sw);
+  sVisited[sw.first][sw.second] = 1;
+
   int d = 0;
   while (true) {
     if (check()) {
@@ -92,6 +91,9 @@ int main () {
     swap(ims, tempIms);
     queue<pair<int, int>> emptyQ;
     tempIms = emptyQ;
+    swap(sQ, tempSQ);
+    queue<pair<int, int>> emptyQ2;
+    tempSQ = emptyQ2;
   }
 
   return 0;
