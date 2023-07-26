@@ -82,7 +82,7 @@ int main () {
       for (int j = 0; j < 4; ++j) {
         int ny = ice.first + dy[j];
         int nx = ice.second + dx[j];
-        if (m[ny][nx] == 'X') { 
+        if (m[ny][nx] == 'X' && visited[ny][nx] == 0) { 
           tempIms.push({ ny, nx });
           visited[ny][nx] = 1;
         };
