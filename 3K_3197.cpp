@@ -5,27 +5,11 @@ using namespace std;
 int r, c;
 const int M = 1501;
 char m[M][M];
-int visited[M][M];
 int sVisited[M][M]; // swan visited
 int dy[4] = { -1, 0, 1, 0 };
 int dx[4] = { 0, 1, 0, -1 };
 vector<pair<int, int>> ss; // swans
-vector<pair<int, int>> ims; // ice list to be melted
-
-void dfs(int y, int x) {
-  visited[y][x] = 1;
-  if (m[y][x] == 'X') {
-    ims.push_back({ y, x });
-    return;
-  }
-  for (int i = 0; i < 4; ++i) {
-    int ny = y + dy[i];
-    int nx = x + dx[i];
-    if (ny < 0 || nx < 0 || ny >= r || nx >= c) continue;
-    if (visited[ny][nx] != 0) continue;
-    dfs(ny, nx);
-  }
-}
+queue<pair<int, int>> ims; // ice list to be melted
 
 bool check () {
   fill(&sVisited[0][0], &sVisited[0][0] + M * M, 0);
@@ -51,6 +35,16 @@ bool check () {
   return false;
 }
 
+bool nearWater(int y, int x) {
+  for (int i = 0; i < 4; ++i) {
+    int ny = y + dy[i];
+    int nx = x + dx[i];
+    if (ny < 0 || nx < 0 || ny >= r || nx >= c) continue;
+    if (m[ny][nx] != 'X') return true;
+  }
+  return false;
+}
+
 int main () {
   cin >> r >> c;
   for (int i = 0; i < r; ++i) {
@@ -64,24 +58,31 @@ int main () {
     }
   }
 
-  int d = 0;
-  while (true) {
-
-    d++;
-    for (int i = 0; i < r; ++i) {
-      for (int j = 0; j < c; ++j) {
-        if (m[i][j] == 'X' || visited[i][j] != 0) continue;
-        dfs(i, j);
+  for (int i = 0; i < r; ++i) {
+    for (int j = 0; j < c; ++j) {
+      if (m[i][j] == 'X' && nearWater(i, j)) {
+        ims.push({ i, j });
       }
     }
-    for (pair<int, int> i : ims) {
-      m[i.first][i.second] = '.';
-    }
-    ims.clear();
-    fill(&visited[0][0], &visited[0][0] + M * M, 0);
+  }
+
+  int d = 0;
+  while (true) {
     if (check()) {
       cout << d;
       break;
+    }
+    d++;
+    int sz = ims.size();
+    for (int i = 0; i < sz; ++i) {
+      pair<int, int> ice = ims.front();
+      ims.pop();
+      m[ice.first][ice.second] = '.';
+      for (int j = 0; j < 4; ++j) {
+        int ny = ice.first + dy[j];
+        int nx = ice.second + dx[j];
+        if (m[ny][nx] == 'X') ims.push({ ny, nx });
+      }
     }
   }
 
