@@ -11,6 +11,7 @@ int dy[4] = { -1, 0, 1, 0 };
 int dx[4] = { 0, 1, 0, -1 };
 pair<int, int> sw; // swan
 queue<pair<int, int>> ims; // ice list to be melted
+queue<pair<int, int>> tempIms; // ice list to be melted TEMP
 
 bool check () {
   fill(&sVisited[0][0], &sVisited[0][0] + M * M, 0);
@@ -75,8 +76,7 @@ int main () {
       break;
     }
     d++;
-    int sz = ims.size();
-    for (int i = 0; i < sz; ++i) {
+    while (!ims.empty()) {
       pair<int, int> ice = ims.front();
       ims.pop();
       m[ice.first][ice.second] = '.';
@@ -84,11 +84,14 @@ int main () {
         int ny = ice.first + dy[j];
         int nx = ice.second + dx[j];
         if (m[ny][nx] == 'X') { 
-          ims.push({ ny, nx });
+          tempIms.push({ ny, nx });
           visited[ny][nx] = 1;
         };
       }
     }
+    swap(ims, tempIms);
+    queue<pair<int, int>> emptyQ;
+    tempIms = emptyQ;
   }
 
   return 0;
