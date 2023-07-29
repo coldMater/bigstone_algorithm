@@ -1,0 +1,1 @@
+I Used Permutation. But can be solved using back-tracking.
