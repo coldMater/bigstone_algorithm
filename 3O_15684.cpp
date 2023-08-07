@@ -4,8 +4,8 @@ using namespace std;
 
 int N, M, H;
 int a, b;
-int m[12][32];
-int test[12][32];
+int m[34][12];
+int test[34][12];
 vector<pair<int, int>> rungs;
 vector<int> s;
 bool flag = false;
