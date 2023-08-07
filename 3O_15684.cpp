@@ -6,12 +6,19 @@ int N, M, H;
 int a, b;
 int m[34][12];
 int test[34][12];
-vector<pair<int, int>> rungs;
-vector<int> s;
-bool flag = false;
+int r = 987654321; // result - min
 
 void print () {
   for (int i = 1 ; i <= H; ++i) {
+    for (int j = 1; j <= N; ++j) {
+      cout << m[i][j] << " ";
+    }
+    cout << "\n";
+  }
+}
+
+void print2() {
+  for (int i = 1 ; i <= H + 1; ++i) {
     for (int j = 1; j <= N; ++j) {
       cout << test[i][j] << " ";
     }
@@ -23,54 +30,50 @@ bool check() {
   for (int i = 1; i <= N; ++i) {
     int y = 1;
     int x = i;
+    // cout << "=====\n";
+    // print();
+    // cout << "-----\n";
+    // memcpy(test, m, sizeof(m));
     while (true) {
-      if (y > H && i == x) break;
-      if (y > H && i != x) return false;
+      // test[y][x] = 8;
+      if (y > H && i == x) { 
+        // cout << "O - (" << i << "-" << x << ")\n";
+        break;
+      }
+      if (y > H && i != x) {
+        // cout << "X - (" << i << "-" << x << ")\n\n";
+        return false;
+      }
       // cout << y << ":" << x << "\n";
-      if (test[y][x] == 0) {
-        y++;
-        continue;
+      if (x < N && m[y][x] != 0) {
+        x = x + 1;
+      } else if (x > 1 && m[y][x - 1] != 0) {
+        x = x - 1;
       }
-      if (test[y][x] != 0) {
-        int nextX = test[y][x];
-        x = nextX;
-        y++;
-        continue;
-      }
+      y++;
     }
   }
+  // cout << "Perfect Match!\n\n";
   return true;
 }
 
-void combi(int n, int r, int d, int start) {
-  if (r == d) {
-    memcpy(test, m, sizeof(int) * 12 * 32);
-    // cout << "rungs: ";
-    for (int cc : s) {
-      // cout << rungs[cc].first << ":" << rungs[cc].second << " ";
-      int y = rungs[cc].first;
-      int x = rungs[cc].second;
-      if (test[y][x] != 0 || test[y][x + 1] != 0) { 
-        // cout << "Unavailable\n";
-        return; 
-      }
-      test[y][x] = x + 1;
-      test[y][x + 1] = x;
-      // cout << y << ":" << x << " ";
-    }
-    // if (r == 1) {
-    // cout << "\n";
-    // print();
-    // }
-    if (check()) {
-      flag = true;
-    }
-    return;
+void go (int y, int x, int d) {
+  if (d > 3) return;
+  // cout << y << ":" << x << ":" << d << "\n";
+  // print();
+  // cout << "\n";
+  if (check()) {
+    // cout << "condition!" << d << "\n";
+    r = min(r, d);
   }
-  for (int i = start; i < n; ++i) {
-    s.push_back(i);
-    combi(n, r, d + 1, i + 1);
-    s.pop_back();
+
+  for (int ny = y; ny <= H; ++ny) {
+    for (int nx = 1; nx < N; ++nx) {
+      if (m[ny][nx] == 1 || (nx - 1 >= 1 && m[ny][nx - 1] == 1)) continue;
+      m[ny][nx] = 1;
+      go(ny, nx, d + 1);
+      m[ny][nx] = 0;
+    }
   }
 }
 
@@ -79,31 +82,21 @@ int main () {
 
   for (int i = 0; i < M; ++i) {
     cin >> a >> b;
-    m[a][b] = b + 1;
-    m[a][b + 1] = b;
+    m[a][b] = 1;
   }
 
-  for (int i = 1; i <= H; ++i) {
-    for (int j = 1; j < N; ++j) {
-      if (m[i][j] == 0 && m[i][j + 1] == 0) {
-        rungs.push_back({ i, j });
-      }
-    }
-  }
+  // if (check()) {
+  //   cout << 0;
+  //   return 0;
+  // }
+  // print();
 
-  memcpy(test, m, sizeof(m));
-  if (check()) {
-    cout << 0;
+  go (1, 1, 0);
+  if (r > 3) {
+    cout << -1;
     return 0;
   }
-  for (int r = 1; r <= rungs.size(); ++r) {
-    combi(rungs.size(), r, 0, 0);
-    if (flag) {
-      cout << r;
-      return 0;
-    }
-  }
-  cout << -1;
+  cout << r;
 
   return 0;
 }
