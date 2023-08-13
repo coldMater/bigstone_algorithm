@@ -5,6 +5,11 @@ using namespace std;
 int N, mp, mf, ms, mv;
 int m[16][5];
 int mm = 987654321;
+struct Food{
+	int mp, mf, ms, mv, cost; 
+}; 
+Food food[16]; 
+
 string combG = "";
 int main () {
   cin >> N;
@@ -29,8 +34,17 @@ int main () {
     }
     // cout << s[0] << " " << s[1] << " " << s[2] << " " << s[3] << " " << s[4] << '\n';
     if (s[0] >= mp && s[1] >= mf && s[2] >= ms && s[3] >= mv) {
-      if (mm > s[4]) {
+      if (mm >= s[4]) {
+        // cout << "Minimal:" << i << " : " << comb << "--" << s[4] << "\n";
+        string prevCombG = combG;
         combG = comb;
+        // cout << "combG:" << combG << " : prevCombG: " << prevCombG << "\n";
+
+        if (prevCombG != "" && mm == s[4] && prevCombG < comb) {
+          combG = prevCombG;
+        }
+        // cout << "final combG:" << combG << "\n";
+
         mm = s[4];
       }
     }
