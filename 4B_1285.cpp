@@ -16,6 +16,7 @@ void go (int here) {
           rc++;
         }
       }
+      // cout << "i: " << i << ":" << rc << "\n";
       m += min(N - rc, rc);
     }
     fm = min(fm, m);
@@ -24,6 +25,7 @@ void go (int here) {
   r[here] = ~r[here];
   go(here + 1);
   r[here] = ~r[here];
+  go(here + 1);
 }
 
 int main () {
