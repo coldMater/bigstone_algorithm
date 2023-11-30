@@ -1,0 +1,5 @@
+- The alphabets extracted from the string can be stored as bit patterns
+- Representing the process of selecting n out of 26 alphabets using a recursive function 
+  - Instead of combinations, ensuring a fixed time complexity.
+  - Hint: The number of alphabets is fixed at 26.
+- Using bitwise operators to compare whether a given set of alphabets can form a specific word
