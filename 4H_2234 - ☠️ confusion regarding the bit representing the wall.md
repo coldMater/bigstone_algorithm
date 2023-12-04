@@ -1,0 +1,1 @@
+I mistakenly interpreted the presence of a wall when the sign was 0. However, if a wall is present, it is indicated by a sign of 1.
