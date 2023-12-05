@@ -1,0 +1,1 @@
+Is it okay to use the stoi() function to convert a string to an integer?

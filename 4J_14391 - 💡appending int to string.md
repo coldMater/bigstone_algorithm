@@ -1,0 +1,1 @@
+To append an integer value to a string variable in C++, you need to first call the to_string() function.
