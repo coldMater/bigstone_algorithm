@@ -27,6 +27,11 @@ int main () {
         if (i & 1 << (y * M + x)) {
           s += m[y][x];
           // cout << "y: " << y << ", x: " << x << ", s: " << s <<   "\n";
+        } else {
+          if (s != "") {
+            result += stoi(s);
+            s = "";
+          }
         }
       }
       if (s != "") {
@@ -42,6 +47,11 @@ int main () {
         if ((i & 1 << (y * M + x)) == 0) {
           s += m[y][x];
           // cout << s << "\n";
+        } else {
+          if (s != "") {
+            result += stoi(s);
+            s = "";
+          }
         }
       }
       if (s != "") {
