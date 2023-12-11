@@ -1,0 +1,1 @@
+BFS is used for finding the minimum distance, while DFS is used for exhaustively searching through everything.
