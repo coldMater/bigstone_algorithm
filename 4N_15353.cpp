@@ -3,6 +3,8 @@
 using namespace std;
 
 string A, B;
+vector<int> l1;
+vector<int> l2;
 vector<int> r;
 
 void print (vector<int> l) {
@@ -14,10 +16,29 @@ void print (vector<int> l) {
 
 int main () {
   cin >> A >> B;
+  for (char a : A) {
+    l1.push_back(a - '0');
+  }
+  for (char b : B) {
+    l2.push_back(b - '0');
+  }
+  reverse(l1.begin(), l1.end());
+  reverse(l2.begin(), l2.end());
   int carry = 0;
-  for (int i = max(A.size(), B.size()) - 1; i >= 0; --i) {
+  if (l1.size() < l2.size()) {
+    int diff = l2.size() - l1.size();
+    for (int i = 0; i < diff; ++i) {
+      l1.push_back(0);
+    }
+  } else if (l1.size() > l2.size()) {
+    int diff = l1.size() - l2.size();
+    for (int i = 0; i < diff; ++i) {
+      l2.push_back(0);
+    }
+  }
+  for (long i = 0; i < l1.size(); ++i) {
     // cout << "step: " << i << "\n";
-    int s = (A[i] - '0') + (B[i] - '0');
+    int s = l1.at(i) + l2.at(i);
     // cout << "s: " << s << "\n";
     int remained = s % 10;
     r.push_back(remained + carry);
