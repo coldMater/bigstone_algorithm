@@ -38,10 +38,10 @@ int main () {
   }
   for (long i = 0; i < l1.size(); ++i) {
     // cout << "step: " << i << "\n";
-    int s = l1.at(i) + l2.at(i);
+    int s = l1.at(i) + l2.at(i) + carry;
     // cout << "s: " << s << "\n";
     int remained = s % 10;
-    r.push_back(remained + carry);
+    r.push_back(remained);
     if (s >= 10) {
       carry = 1;
     } else {
