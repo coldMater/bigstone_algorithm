@@ -1,0 +1,1 @@
+Mission: Solve without vectors (using only strings).
