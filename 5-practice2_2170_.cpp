@@ -17,14 +17,15 @@ int main () {
   for (int i = 1; i < N; ++i) {
     int nextLeft = lines[i].first;
     int nextRight = lines[i].second;
-    if (right >= nextLeft) {
-      right = nextRight;
-      continue;
-    } else if (right < nextLeft) {
+    if (right < nextLeft) {
       ret += right - left;
       left = nextLeft;
       right = nextRight;
+      continue;
     }
+
+    if (nextRight < right) continue;
+    right = nextRight;
   }
   ret += right - left;
   cout << ret;
