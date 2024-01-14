@@ -4,7 +4,7 @@ using namespace std;
 
 int N, K;
 priority_queue<int> pq;
-int ret;
+long long ret; // The price of a jewel can be up to one hundred million, and the number of jewels is 300,000. This implies that the total price of jewels can exceed the upper limit of an integer data type.
 vector<pair<int, int>> jewels;
 int bagWeights[300'001];
 int main () {
@@ -32,16 +32,6 @@ int main () {
       pq.pop();
     }
   }
-  // while (!pq.empty()) {
-  //   tie(p, w) = pq.top(); pq.pop();
-  //   for (int i = 0; i < K; ++i) {
-  //     if (backWeights[i] >= w) {
-  //       // cout << backWeights[i] << " <- price: " << p << "\n";
-  //       ret += p;
-  //       break;
-  //     }
-  //   }
-  // }
 
   cout << ret;
 
