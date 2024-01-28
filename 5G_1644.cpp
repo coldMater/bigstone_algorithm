@@ -30,17 +30,21 @@ int main () {
   int l = 0;
   int h = 0;
   int sum = 0;
-  while (true) {
+  while (h < primes.size()) {
     // printf("l: %d(%d), h: %d(%d)\n", l, l < primes.size() ? primes[l] : -1, h, h < primes.size() ? primes[h] : -1);
-    if (sum >= N) {
+
+    if (sum < N) { 
+      sum += primes[h++]; 
+    } else {
       sum -= primes[l++];
-    } else if (h >= primes.size()) { 
-      break; 
-    } else if (sum < N) {
-       sum += primes[h++];
     }
-    // cout << "sum: " << sum << "\n";
-    if (sum == N) { ret++; }
+
+    if (sum == N) ret++; 
+  }
+
+  while (l < primes.size()) {
+    sum -= primes[l++];
+    if (sum == N) ret++;
   }
   
   cout << ret;
