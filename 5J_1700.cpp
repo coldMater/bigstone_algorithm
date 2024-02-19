@@ -59,16 +59,20 @@ int main () {
     for (int j = 0; j < N; ++j) {
       int distance = 0;
       for (int r = i + 1; r < K; ++r) {
-        distance++;
+        // ⚠️ Be cautious when calculating the distance with the element at the last index of the array.
+        // incorrect approach:
+        // distance++;
+        // if (gs[r] == mt[j]) break;
         if (gs[r] == mt[j]) break;
+        distance++;
       }
-      cout << "plugged gadget: " << mt[j] << ", distance: " << distance << "\n";
+      // cout << "plugged gadget: " << mt[j] << ", distance: " << distance << "\n";
       if (maxDistance < distance) {
         maxDistance = distance;
         multitapIdxToBeReplaced = j;
       }
     }
-    cout << "multitapIdxToBeReplaced: " << multitapIdxToBeReplaced << " , gadget: " << mt[multitapIdxToBeReplaced] << ", with: " << gs[i] << "\n";
+    // cout << "multitapIdxToBeReplaced: " << multitapIdxToBeReplaced << " , gadget: " << mt[multitapIdxToBeReplaced] << ", with: " << gs[i] << "\n";
     ret++;
     mt[multitapIdxToBeReplaced] = gs[i];
     // printMt(mt);
