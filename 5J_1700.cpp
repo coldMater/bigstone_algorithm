@@ -4,55 +4,77 @@ using namespace std;
 
 int N, K, ret;
 int gs[101]; // gadgets
-  vector<int> mt; // multitap
+void printMt(vector<int> mt) {
+  cout << "multitap: ";
+  for (int i = 0; i < mt.size(); ++i) {
+    cout << mt[i] << " ";
+  }
+  cout << "\n\n";
+}
+
+/**
+ * check gadget exists in
+ * @return index of gadget plugged in
+*/
+int check(int gadget, vector<int> mt) {
+  for (int i = 0; i < N; ++i) {
+    if (mt[i] == gadget) return i;
+  }
+  return -1;
+}
+
+/**
+ * @return index of empty slot of multitap
+*/
+int empty(vector<int> mt) {
+  for (int i = 0; i < N; ++i) {
+    if (mt[i] == 0) return i;
+  }
+  return -1;
+}
+
 int main () {
   cin >> N >> K ;
+  vector<int> mt(N); // multitap
   for (int i = 0; i < K; ++i) {
     cin >> gs[i];
   }
 
   for (int i = 0; i < K; ++i) {
-    // cout << "turn: " << i << "(gadget: " << gs[i] << ")" << "\n";
-    if (mt.size() < N) {
-      // cout << "empty slot available: " << gs[i] << "(" << i << ")\n\n";
-      mt.push_back(gs[i]);
+    if (check(gs[i], mt) != -1) {
+      // HIT: check whether gadget is already plugged in
       continue;
     }
 
-    // If the next gadget (gs[i]) is already plugged into the multitap, no action needs to be taken.
-    bool is_already_plugged = false;
-    for (int j = 0; j < mt.size(); ++j) {
-      if (mt[j] == gs[i]) {
-        // cout << gs[i] << "(" << i << ") already plugged\n\n";
-        is_already_plugged = true;
-        break;
-      }
-    }
-    if (is_already_plugged) continue;
-
-    int furthest_away = 0; 
-    int to_be_replaced_mt_idx = 0;
-    for (int j = 0; j < mt.size(); ++j) {
-      int already_plugged = mt[j];
-      // cout << "j: " << j << "(ap: " << already_plugged << ")\n";
-      for (int r = i; r < K; ++r) { // r: remained(not plugged in yet)
-        if (already_plugged == gs[r]) { // already plugged gadget is in the remained gadget list
-          if (furthest_away < r) {
-            furthest_away = r;
-            to_be_replaced_mt_idx = j;
-            // cout << "  : furthest gadget until now: " << gs[r] << "(r: " << r << ")\n";
-          }
-        } else {
-            // cout << "  : - \n";
-        }
-      }
+    // MISS: the gadget(gs[i]) is not plugged in multitap.
+    int emptyIdx = empty(mt);
+    if (emptyIdx != -1) {
+      // multitap empty slot available
+      mt[emptyIdx] = gs[i];
+      continue;
     }
 
-    // cout << "end loop replacement target: " << gs[furthest_away] << " (idx: " << to_be_replaced_mt_idx << ")\n\n";
+    int maxDistance = 0;
+    int multitapIdxToBeReplaced = 0;
+    for (int j = 0; j < N; ++j) {
+      int distance = 0;
+      for (int r = i + 1; r < K; ++r) {
+        distance++;
+        if (gs[r] == mt[j]) break;
+      }
+      cout << "plugged gadget: " << mt[j] << ", distance: " << distance << "\n";
+      if (maxDistance < distance) {
+        maxDistance = distance;
+        multitapIdxToBeReplaced = j;
+      }
+    }
+    cout << "multitapIdxToBeReplaced: " << multitapIdxToBeReplaced << " , gadget: " << mt[multitapIdxToBeReplaced] << ", with: " << gs[i] << "\n";
     ret++;
-    mt.erase(mt.begin() + to_be_replaced_mt_idx);
-  } 
+    mt[multitapIdxToBeReplaced] = gs[i];
+    // printMt(mt);
+  }
 
   cout << ret;
+
   return 0;
 }
