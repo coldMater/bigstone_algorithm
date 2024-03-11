@@ -74,7 +74,7 @@ int main () {
     // reset nm
     memset(nm, 0, sizeof(nm));
 
-    // wind phase A - top circle
+    // wind phase A - upper circle
     // left side
     for (int y = u - 1; y > 0; --y) {
       m[y][0] = m[y - 1][0];
@@ -94,7 +94,7 @@ int main () {
     m[u][1] = 0;
 
 
-    // wind phase A - top circle
+    // wind phase A - lower circle
     // left side
     for (int y = d + 1; y + 1 < R; ++y) {
       m[y][0] = m[y + 1][0];
@@ -104,7 +104,7 @@ int main () {
       m[R - 1][x] = m[R - 1][x + 1];
     }
     // right side
-    for (int y = C - 1; y - 1 >= d; --y) {
+    for (int y = R - 1; y - 1 >= d; --y) { // ⚠️ caution: ny with R(row), nx with C(col) - after 1st try
       m[y][C - 1] = m[y - 1][C - 1];
     }
     // top side
