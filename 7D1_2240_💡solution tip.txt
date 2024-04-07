@@ -1,0 +1,8 @@
+I encountered this problem while studying dynamic programming (DP). 
+Since I wasn't very familiar with DP at the time, I attempted to approach the problem only using DP methods. 
+However, I couldn't find a solution using this approach. (I initially overcomplicated things.)
+
+Instead, I thought, "Even though it's obvious that it will likely time out, let's at least try to pass the examples."
+Surprisingly, after finding the solution this way, the DP approach became apparent.
+
+Therefore, if it seems like there's no way to solve the problem using a specific method(in this case DP), it's often helpful to start by brute-forcing it. This can reveal the appropriate approach.

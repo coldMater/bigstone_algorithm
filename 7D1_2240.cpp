@@ -37,7 +37,7 @@ int main () {
     fp.push_back(temp);
   }
 
-  cout << go (1, W, 0);
+  cout << max(go(1, W, 0), go(2, W - 1, 0)); // firstly, determine whether to change position or not.
 
   return 0;
 }
