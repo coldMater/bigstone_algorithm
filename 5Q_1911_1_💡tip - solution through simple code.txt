@@ -1,0 +1,1 @@
+Rather than trying to establish a perfect logic without any redundancy from the start, I found that by writing the steps in order as code, even if redundancies occurred, a solution came to mind. If finding a solution to a problem seems vague, try expressing it with simple code first.
