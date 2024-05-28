@@ -30,12 +30,12 @@ int main () {
   // cout << "put panel: " << "(count: " << count << ", " << right - N + 1 << "-" << right << ")\n";
 
   for (int i = 0; i < p.size(); ++i) {
-    if (right < p[i].first) { // if the pond's left side is in panel applied right before
+    if (right < p[i].first) { // The right side of the pond goes beyond the area of the panel applied just before
       right = p[i].first;
     }
 
     while (right < p[i].second) {
-      right += L; // ⚠️ mistake
+      right += L; // ⚠️ mistake occurred (N <-> L)
       count++;
       // cout << "put panel: " << "(count: " << count << ", " << right - N << "-" << right - 1 << ")\n";
     }
