@@ -35,7 +35,7 @@ int main () {
     }
 
     while (right < p[i].second) {
-      right += N; // ⚠️ mistake
+      right += L; // ⚠️ mistake
       count++;
       // cout << "put panel: " << "(count: " << count << ", " << right - N << "-" << right - 1 << ")\n";
     }
