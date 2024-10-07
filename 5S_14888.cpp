@@ -6,8 +6,8 @@ int N;
 vector<int> seq; // sequence
 vector<int> ops; // operators // 0: +, 1: -, 2: *, 3: / 
 
-int mx = 0; // max
-int mn = 1987'654'321; // min
+int mx = -1'987'654'321; // max
+int mn = 1'987'654'321; // min
 
 void swap (int l, int r) {
   int temp = ops[l];
