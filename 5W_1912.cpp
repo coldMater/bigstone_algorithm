@@ -3,22 +3,17 @@
 using namespace std;
 
 int n;
-int ps[100'001]; // prefix sum
+int ss; // serial sum
+int M = -987654321; // max
 int main () {
   cin >> n;
-  for (int i = 1; i <= n; ++i) {
+  for (int i = 0; i < n; ++i) {
     int t; // temp
     cin >> t;
-    ps[i] += ps[i - 1] + t;
-  }
-
-  int M = -1'987'654'321; //Max
-  for (int interval = 1; interval <= n; ++interval) {
-    for (int i = 1; i <= n; ++i) {
-      int sum = ps[i] - ps[i - interval];
-      M = max(M, sum);
-    }
+    ss = max(ss + t, t);
+    M = max(M, ss);
   }
   cout << M;
+
   return 0;
 }
