@@ -63,8 +63,8 @@ int go (int d, vector<int> dirs) { // depth, direction
         watch(c.r, c.c, (dirs[i] + 1) % 4, brd);
       } else if (c.t == 4) { // #4 camera
         watch(c.r, c.c, dirs[i], brd);
-        watch(c.r, c.c, (dirs[i] + 2) % 4, brd);
-        watch(c.r, c.c, (dirs[i] + 4) % 4, brd);
+        watch(c.r, c.c, (dirs[i] + 1) % 4, brd);
+        watch(c.r, c.c, (dirs[i] + 3) % 4, brd);
       }
     }
     // printBoard(brd);
@@ -107,4 +107,4 @@ int main () {
   cout << go(0, dirs);
 
   return 0;
-}
+}// https://www.acmicpc.net/problem/15683
