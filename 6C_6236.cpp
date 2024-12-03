@@ -4,7 +4,7 @@ using namespace std;
 
 int N, M;
 int ps[100'000];
-int se = 1'987'654'321; // smallest expenditure
+int se; // largest expenditure
 int ans = 1'987'654'321;
 int main () {
   cin >> N >> M;
@@ -12,7 +12,7 @@ int main () {
   int te = 0; // total expenditure
   for (int i = 0; i < N; ++i) {
     cin >> ps[i];
-    se = min(se, ps[i]);
+    se = max(se, ps[i]);
     te += ps[i];
   }
 
