@@ -3,7 +3,7 @@
 using namespace std;
 
 long long x, y;
-int ans = 999;
+int ans = 1'000'000'001;
 int main () {
   cin >> x >> y;
 
@@ -12,6 +12,7 @@ int main () {
   int r = 1'000'000'000;
   while (l <= r) {
     int mid = (l + r) / 2;
+    // cout << mid << " ";
 
     int z = (y + mid) * 100 / (x + mid);
 
@@ -25,7 +26,7 @@ int main () {
     }
   }
 
-  if (ans == 999) {
+  if (ans == 1'000'000'001) {
     cout << -1;
   } else {
     cout << ans;
