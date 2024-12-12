@@ -3,27 +3,38 @@
 using namespace std;
 
 int T, N, M;
-int nn[1000000];
+int n1[1000000];
+int check (int t) {
+  int l = 0;
+  int r = N - 1;
+  while (l <= r) {
+    int m = (l + r) / 2;
+
+    if (n1[m] < t) {
+      l = m + 1;
+    } else if (n1[m] > t) {
+      r = m - 1;
+    } else {
+      return 1;
+    }
+  }
+  return 0;
+}
 int main () {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL); cout.tie(NULL);
   cin >> T;
   for (int i = 0; i < T; ++i) {
     cin >> N;
     map<int, bool> m;
     for (int j = 0; j < N; ++j) {
-      int temp;
-      cin >> temp;
-      m[temp] = true;
+      scanf("%d", n1 + j);
     }
+    sort(n1, n1 + N);
     cin >> M;
     for (int j = 0; j < M; ++j) {
-      cin >> nn[j];
+      int temp;
+      scanf("%d", &temp);
+      cout << check(temp) << "\n";
     }
-    for (int j = 0; j < M; ++j) {
-      cout << m[nn[j]] << "\n";
-    }
-    memset(nn, 0, sizeof(nn));
   }
   return 0;
 }
