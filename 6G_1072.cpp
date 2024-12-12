@@ -8,7 +8,7 @@ int main () {
   cin >> x >> y;
 
   int iz = y * 100  / x; // initial Z
-  int l = 1;
+  int l = 0;
   int r = 1'000'000'000;
   while (l <= r) {
     int mid = (l + r) / 2;
