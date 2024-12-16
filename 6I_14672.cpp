@@ -4,43 +4,39 @@ using namespace std;
 
 int S, C;
 int ss[1'000'000];
-int ssM = 1'000'001; // min of ss
-long long ans = 1'000'000'000'000'000LL;
+long long ans;
 int main () {
   cin >> S >> C;
+  long long sum = 0;
   for (int i = 0; i < S; ++i) {
     cin >> ss[i];
-    ssM = min(ssM, ss[i]);
+    sum += ss[i];
   }
 
   // amount of green onions each chicken. (= mid)
   int l = 1;
-  int r = ssM;
+  int r = 1'000'000'000;
 
   // int temp = 20;
   while (l <= r) {
     long long mid = (l + r) / 2;
-    // cout << mid << "\n";
+    // cout << "l, r, mid: " << l << "," << r << "," << mid << "\n";
 
-    long long rem = 0; // remained
     long long cs = 0;
     for (int i = 0; i < S; ++i) {
       cs += ss[i] / mid;
-      rem += ss[i] % mid;
     }
 
     // cout << cs << "\n";
-    if (cs == 5) {
-      ans = min(ans, rem);
-      l = mid + 1;
-    } else if (cs > 5) {
+    if (cs >= C) {
+      ans = mid; // 🤔 Consider why min or max might not be necessary.
       l = mid + 1;
     } else {
       r = mid - 1;
     }
   }
 
-  cout << ans;
+  cout << sum - (ans * C);
 
   return 0;
 }
