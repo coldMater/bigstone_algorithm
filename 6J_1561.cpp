@@ -39,9 +39,9 @@ int main () {
 
   // Simulate the last 1 second before.    
   int cnt = 0;
-  int t_1 = ans - 1;
+  long long t_1 = ans - 1;
   for (int i = 0; i < M; ++i) {
-    int c = t_1 / ts[i];
+    long long c = t_1 / ts[i];
     slot[i] = t_1 % ts[i];
     if (slot[i] > 0) c++;
     cnt += c;
