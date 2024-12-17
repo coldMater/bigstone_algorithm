@@ -37,14 +37,14 @@ int main() {
 
     if (bluNum < M) {
       // Fewer Blu-rays are needed than allowed; reduce Blu-ray size
-      ans = min(ans, mid);
+      ans = mid;
       r = mid - 1;
     } else if (bluNum > M) {
       // More Blu-rays are needed than allowed; increase Blu-ray size
       l = mid + 1;
     } else { 
       // Exactly M Blu-rays are used; minimize Blu-ray size
-      ans = min(ans, mid);
+      ans = mid;
       r = mid - 1;
     }
   }

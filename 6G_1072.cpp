@@ -21,7 +21,7 @@ int main () {
       l = mid + 1;
     } else {
       // changed, need to find minimium victory count
-      ans = min(ans, mid);
+      ans = mid;
       r = mid - 1;
     }
   }

@@ -72,7 +72,7 @@ int main () {
       // cout << "lose!" << "next l: " << l << "\n\n";
     } else {
       // success
-      ans = min(ans, H_MaxHP);
+      ans = H_MaxHP;
       r = H_MaxHP - 1;
       // cout << "win!" << "next r: " << r << "\n\n";
     }

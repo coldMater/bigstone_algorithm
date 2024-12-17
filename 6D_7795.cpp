@@ -55,7 +55,7 @@ int main () {
         if (b[mid] < a[j]) {
           // cout << "b[mid]: " << b[mid] << ", a[j]: " << a[j] << "\n";
           l = mid + 1;
-          t = max(t, mid + 1);
+          t = mid + 1;
         } else {
           r = mid - 1;
         }
