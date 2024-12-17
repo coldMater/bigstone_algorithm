@@ -2,46 +2,61 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int N, M;
+long long N;
+int M;
 int ts[10'000]; // time of each machine
 int slot[10'000];
-
-void printSlot() {
-  for (int i = 0; i < M; ++i) {
-    cout << slot[i] << " ";
-  }
-  cout << "\n";
-}
-
+long long ans;
 int main () {
   cin >> N >> M;
   for (int i = 0; i < M; ++i) {
     cin >> ts[i];
   }
+  // cout << N;
 
-  int cnt = N;
-  while (true) {
-    // phase1. boarding
-    int ans = -1;
-    for (int i = 0; i < M; ++i) {
-      if (slot[i] == 0) { 
-        slot[i] = ts[i];
-        if (--cnt <= 0) {
-          cout << i + 1;
-          return 0;
-        }
-      };
-    }
-    // cout << "boarding: \n";
-    // printSlot();
+  long long l = 1;
+  long long r = 2'000'000'000LL * 30LL; // There is only one machine, and it takes 30 minutes.
+  while (l <= r) {
+    long long t = (l + r) / 2; // time
 
-    // phase 2. tick
-    for (int i = 0; i < M; ++i) {
-      if (slot[i] > 0) slot[i]--;
+    long long cnt = 0;
+    for (int i = 0 ; i < M; ++i) {
+      long long cs = t / ts[i]; // During time t, the number of children who ride the i-th ride.
+      if (t % ts[i] != 0) cs++; // Counting the number of children who can remain on that ride.
+      cnt += cs;
     }
-    // cout << "tick: \n";
-    // printSlot();
-    // cout << "\n";
+
+    // cout << "cnt: " << cnt << "\n";
+    if (cnt >= N) {
+      r = t - 1;
+      ans = t;
+    } else {
+      l = t + 1;
+    }
+
+    // cout << "t: " << t << ", ans: " << ans << "\n";
+  }
+
+  // Simulate the last 1 second before.    
+  int cnt = 0;
+  int t_1 = ans - 1;
+  for (int i = 0; i < M; ++i) {
+    int c = t_1 / ts[i];
+    slot[i] = t_1 % ts[i];
+    if (slot[i] > 0) c++;
+    cnt += c;
+    // cout << slot[i] << " ";
+  }
+  // cout << "\n";
+
+  for (int i = 0; i < M; ++i) {
+    if (slot[i] == 0) {
+      cnt++;
+      if (cnt >= N) {
+        cout << i + 1;
+        break;
+      }
+    }
   }
 
   return 0;
