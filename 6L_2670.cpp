@@ -24,7 +24,7 @@ int main () {
     }
     res = max(res, s);
   }
-  printf("%.3f", res);
+  printf("%.3f", round(res*1000) / 1000);
 
   return 0;
 }
