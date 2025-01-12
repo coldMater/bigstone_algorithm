@@ -23,26 +23,22 @@ int go (int y, int x, int d) { // d: direction
   }
 
   if (dp[y][x][d]) return dp[y][x][d]; // ⚠️ This line must not be placed at the beginning of the function.
+  int c = 0;
   if (d == 0) { // previous direction: right
-    int rc = go(y, x + 1, 0); // go right count
-    int drc = go(y + 1, x + 1, 2); // go down right(diagonal) count
-    dp[y][x][d] = rc + drc;
-    return rc + drc;
+    c += go(y, x + 1, 0); // go right count
+    c += go(y + 1, x + 1, 2); // go down right(diagonal) count
   } else if (d == 1) { // previous direction: down
-    int dc = go(y + 1, x, 1); // go down count
-    int drc = go(y + 1, x + 1, 2); // go down right(diagonal) count
-    dp[y][x][d] = dc + drc;
-    return dc + drc;
+    c += go(y + 1, x, 1); // go down count
+    c += go(y + 1, x + 1, 2); // go down right(diagonal) count
   } else if (d == 2) { // downRight
-    int rc = go(y, x + 1, 0); // go right count
-    int drc = go(y + 1, x + 1, 2); // go down right(diagonal) count
-    int dc = go(y + 1, x, 1); // go down count
-    dp[y][x][d] = rc + drc + dc;
-    return rc + drc + dc;
+    c += go(y, x + 1, 0); // go right count
+    c += go(y + 1, x + 1, 2); // go down right(diagonal) count
+    c += go(y + 1, x, 1); // go down count
   } else {
     // exception
   }
-  return 0;
+  dp[y][x][d] = c;
+  return c;
 }
 
 void pb() {
