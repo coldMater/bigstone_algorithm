@@ -24,19 +24,15 @@ int go (int y, int x, int d) { // d: direction
 
   if (dp[y][x][d]) return dp[y][x][d]; // ⚠️ This line must not be placed at the beginning of the function.
   int c = 0;
-  if (d == 0) { // previous direction: right
+
+  if (d == 0 || d == 2) { // previous direction: right
     c += go(y, x + 1, 0); // go right count
-    c += go(y + 1, x + 1, 2); // go down right(diagonal) count
-  } else if (d == 1) { // previous direction: down
+  } 
+  if (d == 1 || d == 2) { // previous direction: down
     c += go(y + 1, x, 1); // go down count
-    c += go(y + 1, x + 1, 2); // go down right(diagonal) count
-  } else if (d == 2) { // downRight
-    c += go(y, x + 1, 0); // go right count
-    c += go(y + 1, x + 1, 2); // go down right(diagonal) count
-    c += go(y + 1, x, 1); // go down count
-  } else {
-    // exception
-  }
+  } 
+  c += go(y + 1, x + 1, 2); // go down right(diagonal) count
+
   dp[y][x][d] = c;
   return c;
 }
