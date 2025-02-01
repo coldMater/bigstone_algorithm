@@ -1,0 +1,6 @@
+
+At first, I attempted to generate a new vector at the base case of the recursive function and propagate the path back up the call stack by adding to the vector. However, this resulted in a bad_alloc error in C++, indicating excessive memory allocation, which I deemed inefficient.
+
+I then approached the problem by using a DP data structure to store results based on the minimum path count within the recursive function, which led to a successful solution.
+
+🚩 Challenge: Try precomputing the DP table using a bottom-up approach with a for loop and referencing the table instead.
