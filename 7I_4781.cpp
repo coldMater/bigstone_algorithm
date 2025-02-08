@@ -12,12 +12,12 @@ int main () {
     fill(dp, dp + 10'001, 0);
     if (n == 0 && m == 0) break;
 
-    int cost = (int)(m * 100);
+    int cost = (int)(m * 100 + 0.5);
     for (int i = 0; i < n; ++i) {
       int cal; // calorie
       double price; // price
       cin >> cal >> price;
-      int p = (int)(price * 100);
+      int p = (int)(price * 100 + 0.5);
       for (int j = p; j <= cost; ++j) {
         dp[j] = max(dp[j], dp[j - p] + cal);
       }

@@ -1,0 +1,4 @@
+I should have been more careful when casting a double to an int because floating-point precision errors can cause unexpected results. I didn’t account for the small rounding errors and forgot to add 0.5 before casting.
+
+For example:
+7.25 -> (* 100) -> 724.9999999999999 -> (int casting) -> 724
