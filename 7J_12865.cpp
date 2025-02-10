@@ -13,7 +13,6 @@ int main () {
       // cout << dp[j] << " ";
     }
     // for (int j = 0; j <= K; ++j) {
-    //   // dp[j] = max(dp[j - W] + V, dp[j]);
     //   cout << dp[j] << " ";
     // }
     // cout << "\n";
