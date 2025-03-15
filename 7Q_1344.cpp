@@ -3,7 +3,7 @@
 using namespace std;
 
 double A, B;
-
+double dp[19][19];
 bool isPrime(int gc) {
   if (gc == 0 || gc == 1) return false;
   for (int i = 2; i * i <= gc; ++i) {
@@ -31,8 +31,11 @@ double go (int gc, int d, double p) { // gc: goal count, d: depth(order of 5 min
     if (!isPrime(gc)) return pq(gc, p);
     return 0.;
   }
+  double& ret = dp[gc][d];
+  if (ret > -0.5) return ret;
 
-  return go(gc + 1, d + 1, p) + go(gc, d + 1, p);
+  ret = go(gc + 1, d + 1, p) + go(gc, d + 1, p);
+  return ret;
 }
 
 int main () {
@@ -40,6 +43,9 @@ int main () {
 
   // auto result = go(0, 1);
   // cout << result.first << " " << result.second;
-
-  cout << 1. - (go(0, 1, A) * go (0, 1, B));
+  memset(dp, -1, sizeof(dp));
+  double r1 = go(0, 1, A);
+  memset(dp, -1, sizeof(dp));
+  double r2 = go(0, 1, B);
+  cout << 1. - (r1 * r2);
 }
