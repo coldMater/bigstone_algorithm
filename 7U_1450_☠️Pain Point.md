@@ -1,0 +1,1 @@
+Initially, when C was 0, I wrote `return 1` (instead of the intended `cout <<`). This turned out to be a mistake and caused me to struggle for quite some time (possibly due to a data type issue - `int` or `long long`).
