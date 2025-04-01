@@ -1,0 +1,2 @@
+The fundraised amount and time do not need to be tracked simultaneously.
+At each decision point, the fundraised amount can be adjusted immediately, while time is accumulated only after reaching the final destination.
