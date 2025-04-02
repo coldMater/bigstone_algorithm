@@ -1,0 +1,6 @@
+# Handling Prev and Next Values in Recursion
+
+As you can see from the code, there is no reason to access a[i + 1] inside the function. 
+The value of a[i] already corresponds to the 'next'(compared to the index i) value, and the parameters l and r represent the previous values.
+(It might have been less confusing if the timing was noted in the variable names beforehand.)
+This part needs to be considered in advance.
