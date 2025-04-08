@@ -6,38 +6,27 @@ int N; // number of jewels N (1 <= N <= 13)
 int M; // number of bags M (1 <= M <= 10)
 int C; // maximum capacity of each bag (1 < C <= 20)
 int js[13]; // weight of jewels (each element: 1 <= weight <= 20)
-
 int bags[10];
-bool put (int n, int w) { // n: bag number, w: weight
-  if (bags[n] + w > C) {
-    return false; // can't put jewel in the bag 
-  }
+int dp[10][1 << 13][21];
 
-  bags[n] += w;
-  return true;
-}
-
-void takeOut(int n, int w) {
-  bags[n] -= w;
-}
-
-int go(int i) {
-  if (i == N) {
+int go(int bn, int bm, int rc) { // bn: bag number, bm: bit masking, rc: remained capacity of bag
+  if (bn == M) {
     return 0;
   }
 
-  // not
+  int& dpv = dp[bn][bm][rc];
+  if (dpv) return dpv;
+
   int mx = 0;
-  mx = max(go (i + 1), mx);
-  
-  // put jewels in the bag
-  for (int j = 0; j < M; ++j) {
-    if (put(j, js[i])) {
-      mx = max(go (i + 1) + 1, mx);
-      takeOut(j, js[i]);
-    }
+  mx = max(mx, go (bn + 1, bm, C)); // the case that jump next bag without put jewel present bag
+
+  for (int i = 0; i < N; ++i) {
+    if (rc < js[i])  continue; // can't pack jewel in present bag
+    if (bm & (1 << i)) continue; // i'th jewel is already packed in previous packing phase
+    mx = max(mx, go(bn, bm | (1 << i), rc - js[i]) + 1);
   }
 
+  dpv = mx;
   return mx;
 }
 
@@ -48,6 +37,6 @@ int main () {
     cin >> js[i];
   }
 
-  cout << go (0);
+  cout << go (0, 0, C);
   return 0;
 }
