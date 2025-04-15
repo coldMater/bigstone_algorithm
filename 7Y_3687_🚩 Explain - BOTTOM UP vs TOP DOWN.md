@@ -1,4 +1,0 @@
-- bottom up
-  - tabulation
-- top down
-  - memoization
