@@ -1,0 +1,3 @@
+- Another solution seems to take a different approach (in my case: bitmasking, Greedy).
+  - Greedy: Deploy the friend with the longest distance first. (Optimal Substructure: The area covered by a friend who can cover a shorter distance can always be covered by a friend who can cover a longer distance.)
+  - Bitmasking: Memorize which points have been checked in each function call.
