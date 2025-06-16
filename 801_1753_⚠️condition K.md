@@ -1,0 +1,1 @@
+- Initially solved the problem without realizing the existence of condition K: Be cautious.

@@ -4,7 +4,7 @@ using namespace std;
 
 int V, E; // 1 <= V <= 20,000, 1 <= E <= 300,000
 int K; // number of start node
-int adj[20'001][20'001];
+vector<pair<int, int>> adj[20'001]; // adj[u]<v, w>
 int u, v, w;
 int dist[20'001];
 int INF = 1'234'567'890;
@@ -14,25 +14,25 @@ int main () {
   cin >> K;
   for (int i = 0; i < E; ++i) {
     cin >> u >> v >> w;
-    adj[u][v] = w;
-    // cout << adj[u][v] << "\n";
+    adj[u].push_back({v, w});
   }
 
   fill(dist, dist + V + 1, INF);
 
-  dist[1] = 0;
-  pq.push({0, 1});
+  dist[K] = 0;
+  pq.push({0, K});
   while (pq.size()) {
     int here = pq.top().second;
-    int d = pq.top().first;
+    int d = -pq.top().first;
     pq.pop();
 
-    for (int to = 1; to <= V; ++to) {
-      if (adj[here][to] == 0 || to == here) continue;
-      // cout << "here,to: " << here << "," << to << "\n";
-      if (d + adj[here][to] < dist[to]) {
-        dist[to] = d + adj[here][to];
-        pq.push({dist[to], to});
+    // if (dist[here] < d) continue;  // Without this line, the problem still works, but this line is necessary to avoid redundant computations.
+    for (pair<int, int> next : adj[here]) {
+      int to = next.first; // v
+      int weight = next.second; // w
+      if (d + weight < dist[to]) {
+        dist[to] = d + weight;
+        pq.push({-dist[to], to});
       }
     }
   }
