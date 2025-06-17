@@ -1,1 +1,1 @@
-- Initially solved the problem without realizing the existence of condition K: Be cautious.
+- Initially solved the problem without realizing the existence of condition K(meaning start node): Be cautious.
