@@ -32,6 +32,7 @@ int main () {
     long long d_here = -pq_fox.top().first;
     pq_fox.pop();
     for (int next = 1; next <= N; ++next) {
+      if (e[here][next] == INF) continue; // ⚠️ Without this line, TLE occurs.  (🚩 is more reasonable to use an adjacency list approach.)
       long long d_new = d_here + e[here][next];
       if (d_fox[next] > d_new) {
         pq_fox.push({ -d_new, next });
@@ -42,8 +43,7 @@ int main () {
 
   // wolf's
   pq_wolf.push({ 0, 1, 1 });
-  d_wolf[1][1] = 0; // ⚠️
-  d_wolf[1][0] = 0;
+  d_wolf[1][1] = 0; // ⚠️ incorrect code: `d_wolf[1][0] = 0;`
 
   while (!pq_wolf.empty()) {
     int here = get<1>(pq_wolf.top());
@@ -52,17 +52,17 @@ int main () {
     pq_wolf.pop();
     if (d_here != d_wolf[here][boost]) continue;
     for (int next = 1; next <= N; ++next) {
-      int d = boost ? e[here][next] / 2 : e[here][next] * 2;
-      long long d_new = d_here + d;
+      if (e[here][next] == INF) continue; // ⚠️ Without this line, TLE occurs.  (🚩 is more reasonable to use an adjacency list approach.)
+      long long d_new = d_here + (boost ? e[here][next] / 2 : e[here][next] * 2);
       if (d_wolf[next][!boost] > d_new) {
-        pq_wolf.push({ -d_new, next, boost ^ 1 });
+        pq_wolf.push({ -d_new, next, !boost });
         d_wolf[next][!boost] = d_new;
       }
     }
   }
 
   int ans = 0;
-  for (int i = 2; i <= N; ++i) {
+  for (int i = 1; i <= N; ++i) {
     if (d_fox[i] < min(d_wolf[i][0], d_wolf[i][1])) ans++;
   }
   cout << ans;
