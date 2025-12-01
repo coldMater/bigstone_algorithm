@@ -5,7 +5,7 @@ using namespace std;
 int N, k; // N: number of customer, k: number of register
 int id, cnt;
 struct C { // customer
-  int id;
+  long long id;
   int cnt;
   int register_num;
 };
@@ -34,7 +34,7 @@ int main () {
   cin.tie(NULL);cout.tie(NULL);
   cin >> N >> k;
 
-  for (int i = 1; i <= k; ++ i) {
+  for (int i = 1; i <= min(k, N); ++ i) { // ☠️ Did not consider the case where there are fewer customers than counters.
     cin >> id >> cnt;
     pq.push({ id, cnt, i });
   }
