@@ -24,12 +24,12 @@ int main () {
     }
 
     priority_queue<pair<int, pair<int, int>>> pq;
-    pq.push({ m[0][0], { 0, 0 } });
+    pq.push({ -m[0][0], { 0, 0 } }); // ⚠️ Needed to add '-' so that the priority queue pops the smallest value first, but it was missed.
     dist[0][0] = m[0][0];
 
     while(!pq.empty()) {
       auto now = pq.top(); pq.pop();
-      int c = now.first;
+      int c = -now.first;
       int y = now.second.first;
       int x = now.second.second;
 
@@ -41,7 +41,7 @@ int main () {
 
         if (dist[ny][nx] > c + m[ny][nx]) {
           dist[ny][nx] = c + m[ny][nx];
-          pq.push({ c + m[ny][nx], { ny, nx }});
+          pq.push({ -(c + m[ny][nx]), { ny, nx }});
         }
       }
     }
