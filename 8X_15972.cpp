@@ -17,6 +17,14 @@ int temp;
 int walls[1002][1002][4]; // ⚠️ walls[1001][1001] memory overflow
 int wh[1001][1001]; // heights of water
 vector<pair<pair<int, int>, int>> drains;
+
+struct comp{
+    bool operator()(pair<pair<int, int>, int> & a, pair<pair<int, int>, int> & b){
+      if (a.second > b.second) return true;
+      return false;
+    }
+};
+
 int main () {
   cin >> N >> M >> H;
   for (int i = 1; i <= N; ++i) {
@@ -77,15 +85,15 @@ int main () {
     auto drain = drains.back();
     drains.pop_back();
 
-    queue <pair<pair<int, int>, int>> q;
+    priority_queue <pair<pair<int, int>, int>, vector<pair<pair<int, int>, int>>, comp> q;
     if (drain.second >= wh[drain.first.first][drain.first.second]) continue;
     wh[drain.first.first][drain.first.second] = drain.second;
     q.push(drain);
 
     while (!q.empty()) {
-      int y = q.front().first.first;
-      int x = q.front().first.second;
-      int h = q.front().second;
+      int y = q.top().first.first;
+      int x = q.top().first.second;
+      int h = q.top().second;
       q.pop();
 
       for (int i = 0; i < 4; ++i) {
