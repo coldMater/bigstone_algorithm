@@ -1,0 +1,1 @@
+To satisfy the final condition, 1 <= N, M, H <= 1000, it was necessary to use a priority queue. There was no other practical way to optimize the solution, so I tried using it. However, it is worth examining more precisely why using a priority queue is advantageous in this context.

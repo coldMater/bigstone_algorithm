@@ -103,15 +103,15 @@ int main () {
         int nx = x + dx[i];
         if (ny <= 0 || nx <= 0 || ny > N || nx > M) continue;
         int height_hall = walls[y][x][i];
-        int height_next = wh[ny][nx];
+        int height_neighbor = wh[ny][nx];
 
-        if (height_hall <= h && height_next > h) {
+        if (height_hall <= h && height_neighbor > h) {
           wh[ny][nx] = h;
           q.push({ { ny, nx }, wh[ny][nx] });
           continue;
         }
 
-        if (height_hall > h && height_hall <= height_next) {
+        if (height_hall > h && height_hall <= height_neighbor) {
           wh[ny][nx] = height_hall;
           q.push({ { ny, nx }, wh[ny][nx] });
           continue;
