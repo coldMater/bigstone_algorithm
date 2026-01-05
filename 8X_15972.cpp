@@ -14,7 +14,7 @@ int dx[4] = { 0, 1, 0, -1 };
 
 int N, M, H;
 int temp;
-int walls[1001][1001][4];
+int walls[1002][1002][4]; // ⚠️ walls[1001][1001] memory overflow
 int wh[1001][1001]; // heights of water
 vector<pair<pair<int, int>, int>> drains;
 int main () {
@@ -116,7 +116,9 @@ int main () {
   for (int i = 1; i <= N; ++i) {
     for (int j = 1; j <= M; ++j) {
       res += wh[i][j];
-      // cout << wh[i][j] << " ";
+      // if (wh[i][j] != 1) {
+      //   cout << i << " " << j << " " << " - H: " << wh[i][j] << "\n";
+      // }
     }
     // cout << "\n";
   }
