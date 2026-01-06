@@ -1,0 +1,1 @@
+In particular, I couldn't figure out how this problem is related to DFS or BFS. When given a comparison of ranks between A and B, I couldn't come up with the idea of using a data structure like vector<int> arr[] to count higher and lower ranks starting from X. As a result, I couldn't even think of using such a data structure.
