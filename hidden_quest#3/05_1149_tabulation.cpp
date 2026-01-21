@@ -5,7 +5,7 @@ using namespace std;
 int N;
 int r, g, b;
 vector<vector<int>> cs;
-int dp[1001][3];
+int dp[1001][3]; // 🚩 TODO: Reduce space complexity to O(1)
 int main () {
   cin >> N;
 
