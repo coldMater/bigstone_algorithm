@@ -1,0 +1,3 @@
+- Top-down (memoization): You don't have to calculate every state.
+- Bottom-up (tabulation): You have to calculate every state.
+- The problem at https://www.acmicpc.net/problem/1149 is an excellent example for practicing bottom-up (tabulation) dynamic programming.
